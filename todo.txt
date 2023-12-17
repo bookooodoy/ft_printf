@@ -1,0 +1,1 @@
+fix special cases in .txt, implement prt_vals with flags function (one for all types) and main.c || then testcases and debugging

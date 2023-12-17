@@ -1,51 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   convert_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 16:51:34 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 02:25:48 by nraymond         ###   ########.fr       */
+/*   Created: 2023/12/17 06:40:06 by nraymond          #+#    #+#             */
+/*   Updated: 2023/12/17 06:50:31 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/ft_printf.h"
 #include "headers/libft.h"
 
-int	ft_printf(const char *s/*, ...*/)
+char	*convert_c(const char c)
 {
-	int	i;
-	int	c;
-	int	fc;
-	/*va_list vargs;
+	char	*converted;
 
-	va_start(s);*/
-	fc = c = i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-	{
-		/*
-		if (s[i] == '%')
-		{
-			c = init_flag(s+i, vargs);
-			if (c == -1)
-				return (0);
-			c += fc;
-			i += fc;
-		}
-		*/
-		c = ft_putchar(s[i]);
-		if (c == -1)
-			return (0);
-		fc += c;
-		i++;
-	}
-	return (/*va_end(vargs),*/ fc);
+	converted = malloc(sizeof(char) + 1);
+	if (!(converted))
+		return (NULL);
+	converted[0] = c;
+	converted[1] = '\0';
+	return (converted);
 }
-/*
-int	main(void)
-{
-	return 0;
-}*/

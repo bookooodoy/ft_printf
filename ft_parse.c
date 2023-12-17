@@ -6,32 +6,14 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:08:41 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 00:29:22 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/17 02:27:30 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "ft_printf.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "headers/ft_printf.h"
+#include "headers/libft.h"
 
-int	ft_strlen(char *c)
-{
-	int	len;
-
-	len = 0;
-	while (c[len])
-		len++;
-	return (len);
-}
-
-int	ft_isdigit(char c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
-
-int	is_valid_param(const char c, char *valid_params)
+int	is_valid_param(const char c, const char *valid_params)
 {
 	int	i;
 
@@ -74,7 +56,7 @@ char	*get_flags(char *s)
 	char	*flags;
 	int		i;
 	int		c;
-	int		k;
+	size_t		k;
 
 	i = 0;
 	c = 0;
@@ -182,7 +164,7 @@ char	*parse_legal_flags(char *flags, char cflag)
 		flags = overwrite_flags(flags, ' ');
 	return (flags);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	if (argc == 2)
@@ -197,4 +179,4 @@ int	main(int argc, char **argv)
 		printf("PARSED_FLAGS = %s\n", parse_legal_flags(flags, cflag));
 	}
 	return 0;
-}
+}*/

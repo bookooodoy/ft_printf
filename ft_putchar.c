@@ -6,11 +6,12 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:46:58 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/16 18:50:25 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/17 02:26:04 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "headers/ft_printf.h"
+#include "headers/libft.h"
 
 int	ft_putchar(char c)
 {

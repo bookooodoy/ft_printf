@@ -1,4 +1,4 @@
-#illegal cases
+illegal cases
 
 "%c" : 
 valid_buff = void * only for 1c
@@ -65,7 +65,7 @@ legal_flags = NONE
 range false
 precision false
 
-prinft params legal disposition = "%{flags (optional)}{precision (optional)}{range (optional)}{cflag}"
+prinft params legal disposition = "%{flags (optional)}{precision (optional)}{range (optional)}{range (optional)}{cflag}"
 flags cant be before or after range or before or after cflag
 
 SPECIAL CASES= 1) '-' overwrite if 0 in flags
@@ -73,7 +73,10 @@ SPECIAL CASES= 1) '-' overwrite if 0 in flags
 			for any (char *) printf will return the values printed but wont print to stdout
 			for any (int) printf will justify right and pad left with spaces (instead of left justify with 0 padding)
 		3) precision without range = range is set to 0;	
-		4) + overwrites ' ' if both in flags;
+		4) precision set with range:
+			if converted buffer value is smaller than range, fill up with 0 or spaces (if flags) until reached range
+		5) + overwrites ' ' if both in flags;
+		6) Flags can contain BOTH field width and Precision (followed by INT) that are 2 separate values and act both differently
  
 
 #logic
