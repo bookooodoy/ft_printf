@@ -21,7 +21,8 @@ typedef	struct
 {
 	void		*buffer; 
 	char		*flags;
-	unsigned int	range;
+	char		cflag;
+	unsigned int	fwidth;
 	unsigned int	precision;
 } prt_t;
 
@@ -40,12 +41,15 @@ char    	*convert_d_i(int i);
 char    	*convert_u(unsigned int i);
 
 // core functions (print buffer with params and return len of printed value)
-prt_t	*init_params(void *buff, char *lflags, unsigned int lrange, unsigned int isprecision);
+prt_t	*init_params(void *buff, char *lflags, unsigned int lfwidth, unsigned int isprecision);
+void	free_prt_t(prt_t * object);
+void	convert_precision_buffer(prt_t * object);
 
 // parsing
 int		is_valid_param(const char c, const char *valid_params);
 char		get_cflag(const char *s);
 char		*get_flags(char *s);
+unsigned int	get_fwidth(char *s);
 unsigned int	get_range(char *s);
 unsigned int    get_precision(char *s);
 char	    	*overwrite_flags(char *flags, char ignored);

@@ -12,6 +12,7 @@
 
 #include "headers/ft_printf.h"
 #include "headers/libft.h"
+#include <stdio.h>
 
 int	is_valid_param(const char c, const char *valid_params)
 {
@@ -36,19 +37,30 @@ char	get_cflag(const char *s)
 	i = 0;
 	if (!s)
 		return (0);
-	if (s[i] == '%')
+	if (is_valid_param(s[i], "cspdiuxX%"))
 		return (s[i]);
 	while (s[i] && is_valid_param(s[i], " -+0#"))
 		i++;
+	if (s[i] == '.') // that means no field width
+	{
+		i++;
+		while (s[i] && ft_isdigit(s[i])) // possible precision
+			i++;
+		if (!(is_valid_param(s[i], "cspdiuxX")))
+			return (0);
+		return (s[i]);
+	}
+	while (s[i] && ft_isdigit(s[i])) // that means field width
+		i++;
 	if (s[i] == '.')
+		i++;
+	while (s[i] && ft_isdigit(s[i])) // check for precision
 		i++;
 	while (s[i] && ft_isdigit(s[i]))
 		i++;
-	if (s[i] == '.')
-		i++;
-	if (is_valid_param(s[i], "cspdiuxX"))
-		return (s[i]);
-	return (0);
+	if (!(is_valid_param(s[i], "cspdiuxX")))
+		return (0);
+	return (s[i]);
 }
 
 char	*get_flags(char *s)
@@ -89,6 +101,8 @@ unsigned int	get_range(char *s)
 
 	i = 0;
 	range = 0;
+	if (!s)
+		return (0);
 	while ((s[i] && !ft_isdigit(s[i])) || (s[i] && s[i] == '0'))
 		i++;
 	while (s[i] && ft_isdigit(s[i]))
@@ -98,16 +112,19 @@ unsigned int	get_range(char *s)
 
 unsigned int	get_precision(char *s)
 {
-	int	i;
+	int		i;
+	unsigned int	precision;
 
+	precision = 0;
 	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '.')
-			return (1);
+	if (!s)
+		return (0);
+	while (s[i] && s[i] != '.')
 		i++;
-	}
-	return (0);
+	++i;
+	while (s[i] && ft_isdigit(s[i]))
+		precision = (10 * precision) + (s[i++] - '0');	
+	return (precision);
 }
 
 char	*overwrite_flags(char *flags, char ignored)
@@ -179,4 +196,5 @@ int	main(int argc, char **argv)
 		printf("PARSED_FLAGS = %s\n", parse_legal_flags(flags, cflag));
 	}
 	return 0;
-}*/
+}
+*/

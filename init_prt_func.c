@@ -13,18 +13,30 @@
 #include "headers/ft_printf.h"
 #include "headers/libft.h"
 
-prt_t	*init_params(void *buff, char *lflags, unsigned int lrange, unsigned int isprecision)
+prt_t	*init_params(char *s, va_list vargs)
 {
 	prt_t * object;
+	char	*flags;
 
 	object = malloc(sizeof(prt_t));
-	object->buffer = buff;
-	object->flags = lflags;
-	object->range = lrange;
-	object->precision = isprecision;
+	if (!object)
+		return (NULL);
+	object->cflag = get_cflag(s);
+	flags = get_flags(s);
+	object->flags = parse_legal_flags(flags, object->cflag);
+	object->fwidth = get_range(s);
+	object->precision = get_precision(s);
+	object->buffer = convert_from_flag(cflag, vargs);
 	return (object);
 }
 
+void	free_prt_t(prt_t * object)
+{
+	free(object->buffer);
+	free(object);
+}
+
+/*
 #include <stdio.h>
 int	main(int argc, char **argv)
 {
@@ -45,7 +57,9 @@ int	main(int argc, char **argv)
 		unsigned int range = get_range(s+1);
 		unsigned int precision = get_precision(s+1);
 		prt_t * object = init_params((void *)sval, lflags ,range, precision);
-		printf("object->buffer=\"%s\"\nobject->flags=%s\nobject->range=%d\nobject->precision=%d\n", (char *)object->buffer, object->flags, object->range, object->precision);
+		printf("object->buffer=\"%s\"\nobject->flags=%s\nobject->range=%d\nobject->precision=%d\n", (char *)object->buffer, object->flags, object->fwidth, object->precision);
+		free_prt_t(object, sval);
 	}
 	return 0;
 }
+*/

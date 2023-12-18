@@ -1,1 +1,9 @@
 fix special cases in .txt, implement prt_vals with flags function (one for all types) and main.c || then testcases and debugging
+
+
+fwidth : if total len of already converted buffer is smaller than the field width, print with padding (based off flags)
+
+
+function convert_fwidth
+
+check for flags (unique) and store it in the value. If a both precision appear

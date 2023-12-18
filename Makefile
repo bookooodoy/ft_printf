@@ -30,6 +30,13 @@ SRCS=ft_printf.c\
      ft_parse.c\
      ft_putchar.c\
      convert_p.c\
+     convert_c.c\
+     convert_s.c\
+     convert_x.c\
+     convert_integers.c\
+     init_prt_func.c\
+     convert_precision_buff.c\
+     convert_fwidth_buff.c
 
 OBJ=$(SRCS:.c=.o)
 
@@ -59,6 +66,11 @@ $(LIBFT):
 	@echo "\n$(BLUE)Compiling object...$(RESET)\n"
 	$(CC) -o $@ -c $< $(CFLAGS)
 
+compile: 
+	@echo "$(BOLD)$(CYAN)Compiling...$(RESET)"
+	$(CC) $(CLFAGS) -o printf -g3 $(SRCS) $(INCL) $(LIBFT)
+	@echo "$(BOLD)$(MAGENTA)Done.$(RESET)\n"
+
 clean:
 	@echo "$(BOLD)$(CYAN)Executing clean...$(RESET)"
 	@echo "\n$(BOLD)$(RED)Deleting object files...$(RESET)\n"
@@ -71,6 +83,9 @@ fclean: clean
 	$(RM) -f $(NAME)
 	@echo "\n$(BOLD)$(YELLOW)Deleting .gch header files...$(RESET)\n"
 	$(RM) -f $(GCH)
+	@echo "$(BOLD)$(MAGENTA)Done.$(RESET)\n"
+	@echo "\n$(BOLD)$(YELLOW)Deleting executable...$(RESET)\n"
+	$(RM) -f printf
 	@echo "$(BOLD)$(MAGENTA)Done.$(RESET)\n"
 
 re: fclean all

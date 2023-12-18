@@ -19,7 +19,7 @@ valid_buff = void * to char *
 illegal_flags="#0 +"
 legal_flags="-"
 range true
-precision true
+precision false
 
 "%d" :
 valid_buff= void * to (int to char*)

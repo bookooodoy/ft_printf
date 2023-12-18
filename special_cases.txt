@@ -1,0 +1,22 @@
+SPECIAL_CASES
+
+func convert_precision
+
+gets object and precision as parameters
+if precision non empty
+	if ft_isdigit converted buffer is False
+		precision will only truncate len of string is bigger.
+			strndup max len = precision
+		prt_object->buffer = newly formatted string
+	if it is True
+		if the lenght of the buffer is smaller than precision:
+			strdup to the lenght of the precision
+				fill the first (precision - len bytes) with bzero
+			then strcpy the remainents of the string
+			free old buffer
+			prt_object->buffer = newly formatted string
+			
+
+func convert_field_width
+
+gets object, field width and buffer as parameter
