@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:51:34 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/18 20:31:25 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:44:01 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ int	ft_printf(const char *s, ...)
 		{
 			substr = ft_substr(s, i+1, ft_strlen(s));
 			c += get_prt_objsize(substr, vargs);
-			i++;
-			while (!is_valid_param(s[i], "cspdiuxX%"))
+			while (substr[i+1] && !is_valid_param(substr[i], "cspdiuxX%"))
 				i++;
 			free(substr);
 		}
@@ -72,10 +71,8 @@ int	ft_printf(const char *s, ...)
 	return (va_end(vargs), c);
 }
 
-/*
 int	main(void)
 {
-	ft_printf("%1.1x lalala\n%120duuuai\n%-100.2s\n", 1253, 124, "ceci est un test");
+	ft_printf("%10x lalala\n%duuuai\n%-100.2s\n", 1253, 100, "ceci est un test");
 	return 0;
 }
-*/

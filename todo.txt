@@ -1,19 +1,4 @@
-fix special cases in .txt, implement prt_vals with flags function (one for all types) and main.c || then testcases and debugging
-
-
-fwidth : if total len of already converted buffer is smaller than the field width, print with padding (based off flags)
-
-
-function convert_fwidth
-
-check for flags
-
-
-
-
-convert buffer with flags
-# : x and X
-
-0: diuxX
-
-- : s S
+1) check individually & fix every function for converting buffers works
+2) dress map for logic operation for flags, precision and fwidth for buffer
+3) protect write()
+4) norme everything 
