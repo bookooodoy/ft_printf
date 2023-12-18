@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert_precision_buff.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/18 17:31:07 by nraymond          #+#    #+#             */
+/*   Updated: 2023/12/18 19:21:43 by nraymond         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "headers/ft_printf.h"
 #include "headers/libft.h"
 
@@ -12,13 +24,13 @@ char	*convert_from_flag(char cflag, va_list vargs)
 	if (cflag == 's')
 		return (convert_s(va_arg(vargs, char *)));
 	if (cflag == 'c')
-		return (convert_c(va_arg(vargs, char)));
+		return (convert_c(va_arg(vargs, int)));
 	if (cflag == 'p')
-		return (convert_p(va_arg(vargs, void *), "0123456789abcdef"));
+		return (convert_arg_p(va_arg(vargs, void *), "0123456789abcdef"));
 	if (cflag == 'x')
 		return (convert_x(va_arg(vargs, unsigned int), "0123456789abcdef"));
 	if (cflag == 'X')
-		return (convert_X(va_arg(vargs, unsigned int), "0123456789ABCDEF"));
+		return (convert_x(va_arg(vargs, unsigned int), "0123456789ABCDEF"));
 	if (cflag == '%')
 		return ("%");
 	return (NULL);
@@ -57,30 +69,56 @@ void	convert_precision_buffer(prt_t * object)
 		}
 	}
 }
+
+prt_t	*test(char *s, ...)
+{
+	va_list vargs;
+	prt_t * object;
+
+	va_start(vargs, s);
+	object = init_params(s+1, vargs);
+
+	va_end(vargs);
+	return (object);
+}
+/*
 #include <stdio.h>
+void	print_object(prt_t * object)
+{
+	printf("Convert Flag=%c\nBuffer=%s\nValid Flags=%s\nRange(optional)=%u\nPrecision(optional)=%u\n\n", object->cflag, object->buffer, object->flags, object->fwidth, object->precision);
+}
+
 int	main(int argc, char **argv)
 {
-	if (argc == 3)
+	if (argc == 4)
 	{
-		char	*s = argv[1];
-		char	*varg = argv[2];
-		char	*sval;
-		char	cflag = get_cflag(s+1);
-		if (!cflag)
-		{
-			printf("Error. Invalid or absent flag.\n");
-			return 0;
-		}
-		sval = convert_s(varg);
-		char	*flags = get_flags(s+1);
-		char	*lflags = parse_legal_flags(flags, cflag);
-		unsigned int range = get_range(s+1);
-		unsigned int precision = get_precision(s+1);
-		prt_t * object = init_params((void *)sval, lflags ,range, precision);
-		printf("object->cflag=%c\nobject->buffer=\"%s\"\nobject->flags=%s\nobject->range=%d\nobject->precision=%d\n", object->cflag, (char *)object->buffer, object->flags, object->fwidth, object->precision);
-		convert_precision_buffer(object);
-		printf("New converted buffer after precision check: %s\n", object->buffer);
-		free_prt_t(object);
+		prt_t * convs;
+		prt_t * convd;
+		prt_t * convx;
+
+		int t = 126648;
+	       
+		convs = test(argv[1], "fils de chien");
+		convd = test(argv[2], t);
+		convx = test(argv[3], t);
+
+		convert_precision_buffer(convs);
+		convert_precision_buffer(convd);
+		convert_precision_buffer(convx);
+		append_flags(convs);
+		append_flags(convd);
+		append_flags(convx);
+
+		convert_fwidth_buffer(convs);
+		printf("\n");
+		convert_fwidth_buffer(convd);
+		printf("\n");
+		convert_fwidth_buffer(convx);
+		printf("\n");
+		print_object(convs);
+		print_object(convd);
+		print_object(convx);
 	}
 	return 0;
 }
+*/

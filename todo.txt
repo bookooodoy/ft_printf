@@ -6,4 +6,14 @@ fwidth : if total len of already converted buffer is smaller than the field widt
 
 function convert_fwidth
 
-check for flags (unique) and store it in the value. If a both precision appear
+check for flags
+
+
+
+
+convert buffer with flags
+# : x and X
+
+0: diuxX
+
+- : s S

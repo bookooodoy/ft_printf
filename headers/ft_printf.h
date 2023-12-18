@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 05:41:05 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 07:10:05 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:13:31 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef	struct
 {
-	void		*buffer; 
+	char		*buffer; 
 	char		*flags;
 	char		cflag;
 	unsigned int	fwidth;
@@ -27,8 +27,9 @@ typedef	struct
 } prt_t;
 
 // main functions
-int     ft_printf(const char *s/*, ...*/);
+int     ft_printf(const char *s, ...);
 int     ft_putchar(char c);
+int     ft_putstr(char *s);
 
 // convert functions to get the buffer of the converted value with argument
 int		get_plen(void *p);
@@ -39,11 +40,14 @@ char		*convert_s(const char *s);
 char		*convert_c(const char c);
 char    	*convert_d_i(int i);
 char    	*convert_u(unsigned int i);
+char    *convert_from_flag(char cflag, va_list vargs);
 
 // core functions (print buffer with params and return len of printed value)
-prt_t	*init_params(void *buff, char *lflags, unsigned int lfwidth, unsigned int isprecision);
+prt_t	*init_params(char *s, va_list vargs);
 void	free_prt_t(prt_t * object);
 void	convert_precision_buffer(prt_t * object);
+int	convert_fwidth_buffer(prt_t * object);
+void    append_flags(prt_t * object);
 
 // parsing
 int		is_valid_param(const char c, const char *valid_params);

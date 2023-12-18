@@ -6,7 +6,7 @@
 #    By: nraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/17 03:29:37 by nraymond          #+#    #+#              #
-#    Updated: 2023/12/17 05:40:24 by nraymond         ###   ########.fr        #
+#    Updated: 2023/12/18 20:30:05 by nraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ INCL=headers/ft_printf.h\
 
 SRCS=ft_printf.c\
      ft_parse.c\
-     ft_putchar.c\
+     ft_writechars.c\
      convert_p.c\
      convert_c.c\
      convert_s.c\
@@ -36,7 +36,8 @@ SRCS=ft_printf.c\
      convert_integers.c\
      init_prt_func.c\
      convert_precision_buff.c\
-     convert_fwidth_buff.c
+     convert_fwidth_buff.c\
+     append_flags.c
 
 OBJ=$(SRCS:.c=.o)
 
@@ -68,7 +69,7 @@ $(LIBFT):
 
 compile: 
 	@echo "$(BOLD)$(CYAN)Compiling...$(RESET)"
-	$(CC) $(CLFAGS) -o printf -g3 $(SRCS) $(INCL) $(LIBFT)
+	$(CC) $(CLFAGS) -g3 $(SRCS) $(INCL) $(LIBFT)
 	@echo "$(BOLD)$(MAGENTA)Done.$(RESET)\n"
 
 clean:
@@ -85,7 +86,7 @@ fclean: clean
 	$(RM) -f $(GCH)
 	@echo "$(BOLD)$(MAGENTA)Done.$(RESET)\n"
 	@echo "\n$(BOLD)$(YELLOW)Deleting executable...$(RESET)\n"
-	$(RM) -f printf
+	$(RM) -f a.out
 	@echo "$(BOLD)$(MAGENTA)Done.$(RESET)\n"
 
 re: fclean all
