@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_c.c                                        :+:      :+:    :+:   */
+/*   convert_s.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 06:40:06 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 06:50:31 by nraymond         ###   ########.fr       */
+/*   Created: 2023/12/17 06:35:43 by nraymond          #+#    #+#             */
+/*   Updated: 2023/12/19 18:53:27 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
-char	*convert_c(const char c)
+char	*convert_s(const char *s)
 {
 	char	*converted;
 
-	converted = malloc(sizeof(char) + 1);
-	if (!(converted))
+	if (!s)
 		return (NULL);
-	converted[0] = c;
-	converted[1] = '\0';
+	converted = ft_strdup(s);
+	if (!converted)
+		return (NULL);
 	return (converted);
 }

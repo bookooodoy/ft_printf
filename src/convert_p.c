@@ -6,12 +6,12 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 01:30:41 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 05:59:16 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:53:23 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
 int	get_plen(void *p)
 {

@@ -6,14 +6,14 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:51:34 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/18 20:44:01 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:55:21 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
-#include <stdio.h>
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
+#include <stdio.h>
 void	prt_obj(prt_t * object)
 {
 	printf("object->buffer=%s\nobject->cflag=%c\nobject->flags=%s\nobject->range=%d\nobject->precision=%d\n", object->buffer, object->cflag, object->flags, object->fwidth, object->precision);
@@ -114,6 +114,6 @@ int	main(void)
 		printf("\n");
 	}
 	*/
-	ft_printf("%-1.2s\n%1.3s\n%#0-1050.100x\ntest", "ceci", "est", 98775);
+	ft_printf("%-1.2s\n%1.3s\n%#01050.100x\ntest", "ceci", "est", 98775);
 	return 0;
 }

@@ -6,12 +6,12 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 05:48:23 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 07:03:27 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:53:29 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
 unsigned int	get_uintlen(int x)
 {

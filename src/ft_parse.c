@@ -6,13 +6,12 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:08:41 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 02:27:30 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:53:32 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
-#include <stdio.h>
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
 int	is_valid_param(const char c, const char *valid_params)
 {

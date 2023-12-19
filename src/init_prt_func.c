@@ -6,12 +6,12 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 07:13:37 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/18 19:18:55 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:53:38 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
 void	free_prt_t(prt_t * object)
 {

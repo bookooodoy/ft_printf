@@ -6,12 +6,12 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:30:59 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/18 20:18:58 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:53:12 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
 void	append_flags(prt_t * object)
 {

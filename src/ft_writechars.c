@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_integers.c                                 :+:      :+:    :+:   */
+/*   ft_writechars.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 06:52:21 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/17 07:01:34 by nraymond         ###   ########.fr       */
+/*   Created: 2023/12/16 18:46:58 by nraymond          #+#    #+#             */
+/*   Updated: 2023/12/19 18:53:36 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
-char	*convert_d_i(int i)
+int	ft_putchar(char c)
 {
-	char	*converted;
-
-	converted = ft_itoa(i);
-	if (!converted)
-		return (NULL);
-	return (converted);
+	return (write(1, &c, 1));
 }
 
-char	*convert_u(unsigned int i)
+int	ft_putstr(char *s)
 {
-	char	*converted;
+	int	c;
+	int	fc;
 
-	converted = ft_itoa((unsigned int)i);
-	if (!converted)
-		return (NULL);
-	return (converted);
+	fc = 0;
+	c = 0;
+	while (*s)
+	{
+		c = ft_putchar(*s++);
+		if (c > 0)
+			fc += c;
+		else
+			return (-1);
+	}
+	return (c);
 }

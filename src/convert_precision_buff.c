@@ -6,12 +6,12 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:31:07 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/18 19:21:43 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:53:25 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/libft.h"
+#include "../headers/ft_printf.h"
+#include "../inc/libft/libft.h"
 
 char	*convert_from_flag(char cflag, va_list vargs)
 {
