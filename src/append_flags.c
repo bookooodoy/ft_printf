@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:30:59 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/19 18:53:12 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:14:39 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,24 @@ void	append_flags(prt_t * object)
 	char	*new_buff;
 	char	*bzeroes;
 
-	// will modify the buffer in place
-	// # flag with x and X
 	if (object->buffer && object->flags && is_valid_param(object->cflag, "xX") && is_valid_param('#', object->flags))
 	{
 		new_buff = ft_strjoin("0x", object->buffer);
 		free(object->buffer);
 		object->buffer = new_buff;
 	}
-	// check for + flag
 	if (object->buffer && object->flags && is_valid_param(object->cflag, "diu") && is_valid_param('+', object->flags))
 	{
 		new_buff = ft_strjoin("+", object->buffer);
 		free(object->buffer);
 		object->buffer = new_buff;
 	}
-	// check for space flag
 	if (object->buffer && object->flags && is_valid_param(object->cflag, "diu") && is_valid_param(' ', object->flags))
 	{
 		new_buff = ft_strjoin(" ", object->buffer);
 		free(object->buffer);
 		object->buffer = new_buff;
 	}
-	// check for '0' flag
 	if (object->buffer && object->flags && object->fwidth && !object->precision && is_valid_param(object->cflag, "diuxX") && is_valid_param('0', object->flags))
 	{
 		if (ft_strlen(object->buffer) < object->fwidth)

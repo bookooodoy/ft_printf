@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 18:21:04 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/19 18:53:19 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:44:31 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@
 int	convert_fwidth_buffer(prt_t * object)
 {
 	size_t	i;
-	int	c;
 
-	c = 0;
 	i = 0;
-	// check if buffer and field width
-	if (object->buffer && object->fwidth && ((ft_strlen(object->buffer) < object->fwidth)))
+	if (object->buffer && object->fwidth)
 	{
 		if (is_valid_param('-', object->flags) && object->cflag != '%')
 		{
-			c += ft_putstr(object->buffer);
+			if (ft_putstr(object->buffer) == -1)
+				return (-1);
 			while (i < object->fwidth - ft_strlen(object->buffer))
 			{
-				c += ft_putchar(' ');
+				if (ft_putchar(' ') == -1)
+					return (-1);
 				i++;
 			}
 		}
-		// no flags
 		else if (object->buffer && object->fwidth)
 		{
 			while (i < object->fwidth - ft_strlen(object->buffer))
 			{
-				c += ft_putchar(' ');
+				if (ft_putchar(' ') == -1)
+					return (-1);
 				i++;
 			}
-			c += ft_putstr(object->buffer);
+			if (ft_putstr(object->buffer) == -1)
+				return (-1);
 		}
 	}
-	return (c);
+	return (i + ft_strlen(object->buffer));
 }

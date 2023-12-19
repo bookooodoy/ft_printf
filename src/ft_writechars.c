@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:46:58 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/19 18:53:36 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:21:57 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@ int	ft_putchar(char c)
 int	ft_putstr(char *s)
 {
 	int	c;
-	int	fc;
 
-	fc = 0;
 	c = 0;
 	while (*s)
 	{
-		c = ft_putchar(*s++);
-		if (c > 0)
-			fc += c;
-		else
+		if (ft_putchar(*s++) == -1)
 			return (-1);
+		c++;
 	}
 	return (c);
 }

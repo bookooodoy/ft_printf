@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:51:34 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/19 18:55:21 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:46:08 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,37 @@
 #include "../inc/libft/libft.h"
 
 #include <stdio.h>
-void	prt_obj(prt_t * object)
-{
-	printf("object->buffer=%s\nobject->cflag=%c\nobject->flags=%s\nobject->range=%d\nobject->precision=%d\n", object->buffer, object->cflag, object->flags, object->fwidth, object->precision);
-}
 
 int	get_prt_objsize(char *s, va_list vargs)
 {
-	// create and init the prt_t object
 	prt_t * object;
 	int	c;
-	int	chk;
 
-	chk = 0;
 	c = 0;
 	object = init_params(s, vargs);
-	// check if any flag, flag combination or cflag is invalid, return -1 if invalid
 	if (!object)
 		return (-1);
-	// if all valid
 	if (object->precision)
 		convert_precision_buffer(object);
 	if (object->flags)
 		append_flags(object);
-	// if fwidth, print and return size
-	if (object->fwidth)
-	{
-		chk = convert_fwidth_buffer(object);
-		if (chk)
-			return (free_prt_t(object), c + chk);
-	}
-	c += ft_putstr(object->buffer);
-	// free the buffer and object
-	free_prt_t(object);
-	// return the size
-	return (c);
+	if (object->fwidth > ft_strlen(object->buffer))
+		c = convert_fwidth_buffer(object);
+	else
+		c = ft_putstr(object->buffer);
+	return (free_prt_t(object), c);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	int	i;
 	int	c;
+	int	fc;
 	char	*substr;
 	va_list vargs;
 
 	va_start(vargs, s);
-	c = i = 0;
+	fc = c = i = 0;
 	if (!s)
 		return (0);
 	while (s[i])
@@ -70,27 +55,19 @@ int	ft_printf(const char *s, ...)
 			substr = ft_substr(s, i+1, ft_strlen(s));
 			if (!substr)
 				return (-1);
-			c += get_prt_objsize(substr, vargs);
+			c = get_prt_objsize(substr, vargs);
 			while (!(is_valid_param(s[i], "cspdiuxX") || !s[i]))
 				i++;
 			free(substr);
 			i++;
 		}
 		else
-			c += ft_putchar(s[i++]);
+			c = ft_putchar(s[i++]);
+		if (c < 0)
+			return (va_end(vargs), -1);
+		fc += c;
 	}
-	return (va_end(vargs), c);
-}
-
-int	test(char *s, ...)
-{
-	va_list vargs;
-
-	va_start(vargs, s);
-	int x = get_prt_objsize(s+1, vargs);
-
-	va_end(vargs);
-	return (x);
+	return (va_end(vargs), fc);
 }
 
 int	main(void)
@@ -98,8 +75,6 @@ int	main(void)
 	/*
 	if (argc == 7)
 	{
-		int	prout = 45;
-		void	*p = &prout;
 		test(argv[1], 'c');
 		printf("\n");
 		test(argv[2], 0);
@@ -114,6 +89,9 @@ int	main(void)
 		printf("\n");
 	}
 	*/
-	ft_printf("%-1.2s\n%1.3s\n%#01050.100x\ntest", "ceci", "est", 98775);
+	int a = ft_printf("%-1.2s\n%1.3s\n%#-1050.100x\ntest\n\n", "ceci", "est", 98775);
+	int b = printf("%-1.2s\n%1.3s\n%#-1050.100x\ntest\n\n", "ceci", "est", 98775);
+
+	printf("%d\n%d\n",a, b);
 	return 0;
 }

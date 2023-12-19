@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:08:41 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/19 18:53:32 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:19:56 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,18 @@ char	get_cflag(const char *s)
 		return (s[i]);
 	while (s[i] && is_valid_param(s[i], " -+0#"))
 		i++;
-	if (s[i] == '.') // that means no field width
+	if (s[i] == '.')
 	{
 		i++;
-		while (s[i] && ft_isdigit(s[i])) // possible precision
+		while (s[i] && ft_isdigit(s[i]))
 			i++;
 		if (!(is_valid_param(s[i], "cspdiuxX")))
 			return (0);
 		return (s[i]);
 	}
-	while (s[i] && ft_isdigit(s[i])) // that means field width
+	while (s[i] && ft_isdigit(s[i]))
 		i++;
 	if (s[i] == '.')
-		i++;
-	while (s[i] && ft_isdigit(s[i])) // check for precision
 		i++;
 	while (s[i] && ft_isdigit(s[i]))
 		i++;
@@ -138,6 +136,8 @@ char	*overwrite_flags(char *flags, char ignored)
 
 	c = 0;
 	i = 0;
+	if (!flags)
+		return (NULL);
 	ov_flags = malloc(sizeof(char) * ft_strlen(flags) - 1);
 	if (!ov_flags)
 		return (NULL);
