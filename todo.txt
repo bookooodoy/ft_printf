@@ -1,4 +1,4 @@
 1) import libft source files
 1) test paco and fix small errors
 2) fix small errors in valgrind
-2) norme everything
+2) norme everything and protect writes
