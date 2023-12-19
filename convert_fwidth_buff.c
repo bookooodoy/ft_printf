@@ -9,7 +9,7 @@ int	convert_fwidth_buffer(prt_t * object)
 	c = 0;
 	i = 0;
 	// check if buffer and field width
-	if (object->buffer && object->fwidth && (ft_strlen(object->buffer) < object->fwidth))
+	if (object->buffer && object->fwidth && ((ft_strlen(object->buffer) < object->fwidth)))
 	{
 		if (is_valid_param('-', object->flags) && object->cflag != '%')
 		{

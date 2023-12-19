@@ -1,4 +1,4 @@
-1) check individually & fix every function for converting buffers works
-2) dress map for logic operation for flags, precision and fwidth for buffer
-3) protect write()
-4) norme everything 
+1) import libft source files
+1) test paco and fix small errors
+2) fix small errors in valgrind
+2) norme everything

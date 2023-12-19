@@ -104,7 +104,11 @@ unsigned int	get_range(char *s)
 	if (!s)
 		return (0);
 	while ((s[i] && !ft_isdigit(s[i])) || (s[i] && s[i] == '0'))
+	{
+		if (s[i] == '.')
+			return (0);
 		i++;
+	}
 	while (s[i] && ft_isdigit(s[i]))
 		range = (10 * range) + (s[i++] - '0');
 	return (range);

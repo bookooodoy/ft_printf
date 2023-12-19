@@ -36,7 +36,7 @@ prt_t	*init_params(char *s, va_list vargs)
 	{
 		object->flags = parse_legal_flags(flags, object->cflag);
 		if (!object->flags)
-			return (NULL);
+			return (free_prt_t(object), NULL);
 	}
 	object->fwidth = get_range(s);
 	object->precision = get_precision(s);

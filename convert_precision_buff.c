@@ -69,18 +69,6 @@ void	convert_precision_buffer(prt_t * object)
 		}
 	}
 }
-
-prt_t	*test(char *s, ...)
-{
-	va_list vargs;
-	prt_t * object;
-
-	va_start(vargs, s);
-	object = init_params(s+1, vargs);
-
-	va_end(vargs);
-	return (object);
-}
 /*
 #include <stdio.h>
 void	print_object(prt_t * object)
