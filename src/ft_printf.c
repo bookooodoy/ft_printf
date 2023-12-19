@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:51:34 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/19 19:46:08 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:55:57 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,13 @@ int	ft_printf(const char *s, ...)
 	return (va_end(vargs), fc);
 }
 
+#include <limits.h>
 int	main(void)
 {
-	/*
-	if (argc == 7)
-	{
-		test(argv[1], 'c');
-		printf("\n");
-		test(argv[2], 0);
-		printf("\n");
-		test(argv[3], 0);
-		printf("\n");
-		test(argv[4], p);
-		printf("\n");
-		test(argv[5], "grosse merde");
-		printf("\n");
-		test(argv[6], 15632);
-		printf("\n");
-	}
-	*/
-	int a = ft_printf("%-1.2s\n%1.3s\n%#-1050.100x\ntest\n\n", "ceci", "est", 98775);
-	int b = printf("%-1.2s\n%1.3s\n%#-1050.100x\ntest\n\n", "ceci", "est", 98775);
-
-	printf("%d\n%d\n",a, b);
+	int a = ft_printf(" %-9X ", INT_MAX);
+	printf("\n\n");
+	int b = printf(" %-9X ", INT_MAX);
+	
+	printf("\n\nVALUES:\n\n(mine) = %d\n(printf) = %d\n\n", a, b);
 	return 0;
 }

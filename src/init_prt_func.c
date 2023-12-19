@@ -6,7 +6,7 @@
 /*   By: nraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 07:13:37 by nraymond          #+#    #+#             */
-/*   Updated: 2023/12/19 19:22:49 by nraymond         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:51:32 by nraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ prt_t	*init_params(char *s, va_list vargs)
 	prt_t * object;
 	char	*flags;
 
+	if (!s)
+		return (NULL);
 	object = malloc(sizeof(prt_t));
 	if (!object)
 		return (NULL);

@@ -6,7 +6,7 @@
 #    By: nraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/17 03:29:37 by nraymond          #+#    #+#              #
-#    Updated: 2023/12/19 18:45:27 by nraymond         ###   ########.fr        #
+#    Updated: 2023/12/19 19:55:50 by nraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,10 @@ CFLAGS=-Werror -Wextra -Wall -I .
 
 CC=cc
 
+bonus: all
+
 all: $(NAME)
+
 
 $(NAME): $(LIBFTA) $(OBJ) $(INCL) Makefile
 	@echo "$(BOLD)$(CYAN)Executing all...$(RESET)"
