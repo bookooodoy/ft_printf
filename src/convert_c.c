@@ -21,6 +21,6 @@ char	*convert_c(const char c)
 	if (!(converted))
 		return (NULL);
 	converted[0] = c;
-	converted[1] = '\0';
+	converted[1] = 0;
 	return (converted);
 }

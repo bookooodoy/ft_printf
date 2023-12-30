@@ -32,7 +32,7 @@ char	*convert_from_flag(char cflag, va_list vargs)
 	if (cflag == 'X')
 		return (convert_x(va_arg(vargs, unsigned int), "0123456789ABCDEF"));
 	if (cflag == '%')
-		return ("%");
+		return (ft_strdup("%"));
 	return (NULL);
 }
 

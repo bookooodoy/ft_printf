@@ -25,8 +25,6 @@ prt_t	*init_params(char *s, va_list vargs)
 	prt_t * object;
 	char	*flags;
 
-	if (!s)
-		return (NULL);
 	object = malloc(sizeof(prt_t));
 	if (!object)
 		return (NULL);

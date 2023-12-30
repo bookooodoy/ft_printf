@@ -100,7 +100,6 @@ $(LIBFTA):
 	$(MAKE) -C $(LIBFT)
 
 %.o : %.c $(INCL) Makefile
-	@echo "\n$(BLUE)Compiling object...$(RESET)\n"
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 compile: re 
