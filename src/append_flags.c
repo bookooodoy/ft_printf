@@ -13,41 +13,69 @@
 #include "../headers/ft_printf.h"
 #include "../inc/libft/libft.h"
 
-void	append_flags(prt_t * object)
+void	append_hashtag(char **buffer)
+{
+	char	*new_buff;
+
+	new_buff = ft_strjoin("0x", *buffer);
+	free(*buffer);
+	*buffer = new_buff;
+}
+
+void	append_plus(char **buffer)
+{
+	char	*new_buff;
+
+	new_buff = ft_strjoin("+", *buffer);
+	free(*buffer);
+	*buffer = new_buff;
+}
+
+void	append_space(char **buffer)
+{
+	char	*new_buff;
+
+	new_buff = ft_strjoin(" ", *buffer);
+	free(*buffer);
+	*buffer = new_buff;
+}
+
+void	append_zeroes(char **buffer, unsigned int *fwidth)
 {
 	char	*new_buff;
 	char	*bzeroes;
 
-	if (object->buffer && object->flags && is_valid_param(object->cflag, "xX") && is_valid_param('#', object->flags))
+	if (ft_strlen(*buffer) < ((size_t) * fwidth))
 	{
-		new_buff = ft_strjoin("0x", object->buffer);
-		free(object->buffer);
-		object->buffer = new_buff;
+		bzeroes = malloc(sizeof(char) * (*fwidth + 2));
+		if (!bzeroes)
+			return ;
+		ft_memset(bzeroes, '0', *fwidth - ft_strlen(*buffer));
+		bzeroes[*fwidth - ft_strlen(*buffer) + 1] = 0;
+		new_buff = ft_strjoin(bzeroes, *buffer);
+		free(*buffer);
+		free(bzeroes);
+		*buffer = new_buff;
 	}
-	if (object->buffer && object->flags && is_valid_param(object->cflag, "diu") && is_valid_param('+', object->flags) && ft_atoi(object->buffer) >= 0)
-	{
-		new_buff = ft_strjoin("+", object->buffer);
-		free(object->buffer);
-		object->buffer = new_buff;
-	}
-	if (object->buffer && object->flags && is_valid_param(object->cflag, "diu") && is_valid_param(' ', object->flags))
-	{
-		new_buff = ft_strjoin(" ", object->buffer);
-		free(object->buffer);
-		object->buffer = new_buff;
-	}
-	if (object->buffer && object->flags && object->fwidth && (object->precision != -1) && is_valid_param(object->cflag, "diuxX") && is_valid_param('0', object->flags))
-	{
-		if (ft_strlen(object->buffer) < object->fwidth)
-		{
-			bzeroes = malloc(sizeof(char) * object->fwidth + 1);
-			if (!bzeroes)
-				return ;
-			ft_memset(bzeroes, '0', object->fwidth - ft_strlen(object->buffer));
-			new_buff = ft_strjoin(bzeroes, object->buffer);
-			free(object->buffer);
-			free(bzeroes);
-			object->buffer = new_buff;
-		}
-	}
+}
+
+void	append_flags(t_prt *object)
+{
+	char	*new_buff;
+	char	*bzeroes;
+
+	if (object->buffer && object->flags && is_valid_param
+		(object->cflag, "xX") && is_valid_param('#', object->flags))
+		append_hashtag(&(object->buffer));
+	if (object->buffer && object->flags && is_valid_param
+		(object->cflag, "diu") && is_valid_param
+		('+', object->flags) && ft_atoi(object->buffer) >= 0)
+		append_plus(&(object->buffer));
+	if (object->buffer && object->flags && is_valid_param
+		(object->cflag, "diu") && is_valid_param(' ', object->flags))
+		append_space(&(object->buffer));
+	if (object->buffer && object->flags && object->fwidth
+		&& (object->precision == -1) && is_valid_param
+		(object->cflag, "diuxX") && is_valid_param('0', object->flags))
+		append_zeroes(&(object->buffer), &(object->fwidth));
 }

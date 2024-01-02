@@ -36,77 +36,45 @@ char	*convert_from_flag(char cflag, va_list vargs)
 	return (NULL);
 }
 
-void	convert_precision_buffer(prt_t * object)
+void	convert_precision_buffer_sflag(t_prt *object)
 {
 	char	*bzeroes;
 	char	*new_buff;
 
+	if (ft_strlen(object->buffer) < (size_t)object->precision)
+	{
+		bzeroes = malloc(sizeof(char) * object->precision + 1);
+		if (!bzeroes)
+			return ;
+		ft_memset(bzeroes, '0', object->precision - ft_strlen(object->buffer));
+		bzeroes[object->precision - ft_strlen(object->buffer)] = 0;
+		new_buff = ft_strjoin(bzeroes, object->buffer);
+		free(object->buffer);
+		free(bzeroes);
+		object->buffer = new_buff;
+	}
+}
+
+void	convert_precision_buffer_digits(t_prt *object)
+{
+	char	*bzeroes;
+	char	*new_buff;
+
+	if (ft_strlen(object->buffer) > (size_t)object->precision)
+	{
+		new_buff = ft_substr(object->buffer, 0, object->precision);
+		free(object->buffer);
+		object->buffer = new_buff;
+	}
+}
+
+void	convert_precision_buffer(t_prt *object)
+{
 	if (object->buffer && object->precision != -1)
 	{
 		if (is_valid_param(object->cflag, "diuxX"))
-		{
-			if (ft_strlen(object->buffer) < (size_t)object->precision)
-			{
-				bzeroes = malloc(sizeof(char) * object->precision + 1);
-				if (!bzeroes)
-					return ;
-				ft_memset(bzeroes, '0', object->precision - ft_strlen(object->buffer));
-				bzeroes[object->precision - ft_strlen(object->buffer)] = 0;
-				new_buff = ft_strjoin(bzeroes, object->buffer);
-				free(object->buffer);
-				free(bzeroes);
-				object->buffer = new_buff; 
-			}
-		}
+			convert_precision_buffer_sflag(object);
 		else if (is_valid_param(object->cflag, "s"))
-		{
-			if (ft_strlen(object->buffer) > (size_t)object->precision)
-			{
-				new_buff = ft_substr(object->buffer, 0, object->precision);
-				free(object->buffer);
-				object->buffer = new_buff;
-			}
-		}
+			convert_precision_buffer_digits(object);
 	}
 }
-/*
-#include <stdio.h>
-void	print_object(prt_t * object)
-{
-	printf("Convert Flag=%c\nBuffer=%s\nValid Flags=%s\nRange(optional)=%u\nPrecision(optional)=%u\n\n", object->cflag, object->buffer, object->flags, object->fwidth, object->precision);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc == 4)
-	{
-		prt_t * convs;
-		prt_t * convd;
-		prt_t * convx;
-
-		int t = 126648;
-	       
-		convs = test(argv[1], "fils de chien");
-		convd = test(argv[2], t);
-		convx = test(argv[3], t);
-
-		convert_precision_buffer(convs);
-		convert_precision_buffer(convd);
-		convert_precision_buffer(convx);
-		append_flags(convs);
-		append_flags(convd);
-		append_flags(convx);
-
-		convert_fwidth_buffer(convs);
-		printf("\n");
-		convert_fwidth_buffer(convd);
-		printf("\n");
-		convert_fwidth_buffer(convx);
-		printf("\n");
-		print_object(convs);
-		print_object(convd);
-		print_object(convx);
-	}
-	return 0;
-}
-*/

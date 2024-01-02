@@ -17,47 +17,40 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef	struct
+typedef struct t_prt
 {
-	char		*buffer; 
-	char		*flags;
-	char		cflag;
+	char			*buffer;
+	char			*flags;
+	char			cflag;
 	unsigned int	fwidth;
-	int	precision;
-} prt_t;
+	int				precision;
+}	t_prt;
 
-// main functions
-int     ft_printf(const char *s, ...);
-int     ft_putchar(char c);
-int     ft_putstr(char *s);
-
-// convert functions to get the buffer of the converted value with argument
-int		get_plen(void *p);
-char		*convert_arg_p(void *p, char *base);
 unsigned int	get_uintlen(int x);
-char		*convert_x(unsigned int x, char *base);
-char		*convert_s(const char *s);
-char		*convert_c(const char c);
-char    	*convert_d_i(int i);
-char	*convert_u(unsigned int i);
-char    *convert_from_flag(char cflag, va_list vargs);
-char    *ft_uitoa(unsigned int n);
-
-// core functions (print buffer with params and return len of printed value)
-prt_t	*init_params(char *s, va_list vargs);
-void	free_prt_t(prt_t * object);
-void	convert_precision_buffer(prt_t * object);
-int	convert_fwidth_buffer(prt_t * object);
-void    append_flags(prt_t * object);
-
-// parsing
-int		is_valid_param(const char c, const char *valid_params);
-char		get_cflag(const char *s);
-char		*get_flags(char *s);
+char			*convert_arg_p(void *p, char *base);
+char			*convert_x(unsigned int x, char *base);
+char			*convert_s(const char *s);
+char			*convert_c(const char c);
+char			*convert_d_i(int i);
+char			*convert_u(unsigned int i);
+char			*convert_from_flag(char cflag, va_list vargs);
+char			*get_flags(char *s);
+char			*ft_uitoa(unsigned int n);
+t_prt			*init_params(char *s, va_list vargs);
+int				ft_printf(const char *s, ...);
+int				ft_putchar(char c);
+int				ft_putstr(char *s);
+int				get_plen(void *p);
+void			free_t_prt(t_prt *object);
+void			convert_precision_buffer(t_prt *object);
+int				convert_fwidth_buffer(t_prt *object);
+void			append_flags(t_prt *object);
+int				is_valid_param(const char c, const char *valid_params);
+char			get_cflag(const char *s);
 unsigned int	get_fwidth(char *s);
 unsigned int	get_range(char *s);
-unsigned int    get_precision(char *s);
-char	    	*overwrite_flags(char *flags, char ignored);
-char    	*parse_legal_flags(char *flags, char cflag);
+unsigned int	get_precision(char *s);
+char			*overwrite_flags(char *flags, char ignored);
+char			*parse_legal_flags(char *flags, char cflag);
 
 #endif
