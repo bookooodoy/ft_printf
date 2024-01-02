@@ -13,63 +13,33 @@
 #include "../headers/ft_printf.h"
 #include "../inc/libft/libft.h"
 
-void	free_prt_t(prt_t * object)
+t_prt	*init_params(char *s, va_list vargs)
 {
-	free(object->buffer);
-	free(object->flags);
-	free(object);
-}
-
-prt_t	*init_params(char *s, va_list vargs)
-{
-	prt_t * object;
+	t_prt	*object;
 	char	*flags;
 
-	object = malloc(sizeof(prt_t));
+	object = malloc(sizeof(t_prt));
 	if (!object)
 		return (NULL);
+	//printf("\nno malloc error\nstring = %s\n", s);
 	object->cflag = get_cflag(s);
 	if (!object->cflag)
 		return (NULL);
+	//printf("no cflag error\nflag = %c\n", object->cflag);
 	flags = get_flags(s);
-	if (flags)
+	if (*flags)
 	{
+		//printf("no flags error (yet)\nflags = %s\n", object->flags);
 		object->flags = parse_legal_flags(flags, object->cflag);
 		if (!object->flags)
-			return (free_prt_t(object), NULL);
+			return (free_t_prt(object), NULL);
+		//printf("no parsed flags error)\nflags = %s\n", object->flags);
 	}
 	object->fwidth = get_range(s);
 	object->precision = get_precision(s);
 	object->buffer = convert_from_flag(object->cflag, vargs);
 	if (!object->buffer)
-		return (free_prt_t(object), NULL);
+		return (free_t_prt(object), NULL);
+	//printf("no buffer error\nbuffer = %s\n", object->buffer);
 	return (object);
 }
-
-/*
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 3)
-	{
-		char	*s = argv[1];
-		char	*varg = argv[2];
-		char	*sval;
-		char	cflag = get_cflag(s+1);
-		if (!cflag)
-		{
-			printf("Error. Invalid or absent flag.\n");
-			return 0;
-		}
-		sval = convert_s(varg);
-		char	*flags = get_flags(s+1);
-		char	*lflags = parse_legal_flags(flags, cflag);
-		unsigned int range = get_range(s+1);
-		unsigned int precision = get_precision(s+1);
-		prt_t * object = init_params((void *)sval, lflags ,range, precision);
-		printf("object->buffer=\"%s\"\nobject->flags=%s\nobject->range=%d\nobject->precision=%d\n", (char *)object->buffer, object->flags, object->fwidth, object->precision);
-		free_prt_t(object, sval);
-	}
-	return 0;
-}
-*/

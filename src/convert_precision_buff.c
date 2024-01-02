@@ -13,6 +13,25 @@
 #include "../headers/ft_printf.h"
 #include "../inc/libft/libft.h"
 
+unsigned int	get_precision(char *s)
+{
+	unsigned int	i;
+	unsigned int	precision;
+
+	precision = 0;
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] && s[i] != '.')
+		i++;
+	if (s[i] != '.')
+		return (-1);
+	++i;
+	while (s[i] && ft_isdigit(s[i]))
+		precision = (10 * precision) + (s[i++] - '0');
+	return (precision);
+}
+
 char	*convert_from_flag(char cflag, va_list vargs)
 {
 	if (is_valid_param(cflag, "diu"))
@@ -57,7 +76,6 @@ void	convert_precision_buffer_sflag(t_prt *object)
 
 void	convert_precision_buffer_digits(t_prt *object)
 {
-	char	*bzeroes;
 	char	*new_buff;
 
 	if (ft_strlen(object->buffer) > (size_t)object->precision)

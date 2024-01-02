@@ -36,8 +36,6 @@ char	get_cflag(const char *s)
 	i = 0;
 	if (!s)
 		return (0);
-	if (is_valid_param(s[i], "cspdiuxX%"))
-		return (s[i]);
 	while (s[i] && is_valid_param(s[i], " -+0#"))
 		i++;
 	if (s[i] == '.')
@@ -55,7 +53,7 @@ char	get_cflag(const char *s)
 		i++;
 	while (s[i] && ft_isdigit(s[i]))
 		i++;
-	if (!(is_valid_param(s[i], "cspdiuxX")))
+	if (!(is_valid_param(s[i], "cspdiuxX%")))
 		return (0);
 	return (s[i]);
 }
@@ -65,7 +63,7 @@ char	*get_flags(char *s)
 	char	*flags;
 	int		i;
 	int		c;
-	size_t		k;
+	size_t	k;
 
 	i = 0;
 	c = 0;
@@ -85,49 +83,8 @@ char	*get_flags(char *s)
 		}
 		flags[c++] = s[i++];
 	}
-	flags[c] = '\0';
-	if (!*flags)
-		return (free(flags), NULL);
+	flags[c] = 0;
 	return (flags);
-}
-
-unsigned int	get_range(char *s)
-{
-	unsigned int	range;
-	int		i;
-
-	i = 0;
-	range = 0;
-	if (!s)
-		return (0);
-	while ((s[i] && !ft_isdigit(s[i])) || (s[i] && s[i] == '0'))
-	{
-		if (s[i] == '.')
-			return (0);
-		i++;
-	}
-	while (s[i] && ft_isdigit(s[i]))
-		range = (10 * range) + (s[i++] - '0');
-	return (range);
-}
-
-unsigned int	get_precision(char *s)
-{
-	int		i;
-	unsigned int	precision;
-
-	precision = 0;
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != '.')
-		i++;
-	if (s[i] != '.')
-		return (-1);
-	++i;
-	while (s[i] && ft_isdigit(s[i]))
-		precision = (10 * precision) + (s[i++] - '0');	
-	return (precision);
 }
 
 char	*overwrite_flags(char *flags, char ignored)
@@ -164,20 +121,14 @@ char	*parse_legal_flags(char *flags, char cflag)
 	while (flags[i])
 	{
 		if (cflag == 'i' || cflag == 'd' || cflag == 'u')
-		{
 			if (!is_valid_param(flags[i], "-+ 0"))
 				return (free(flags), NULL);
-		}
 		if (cflag == 'x' || cflag == 'X')
-		{
 			if (!is_valid_param(flags[i], "-0#"))
 				return (free(flags), NULL);
-		}
 		if (cflag == 'c' || cflag == 's' || cflag == 'p')
-		{
 			if (!is_valid_param(flags[i], "-"))
 				return (free(flags), NULL);
-		}
 		i++;
 	}
 	if (is_valid_param('0', flags) && is_valid_param('-', flags))

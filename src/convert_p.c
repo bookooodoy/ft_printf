@@ -16,11 +16,11 @@
 int	get_plen(void *p)
 {
 	size_t	psize;
-	int	c;
+	int		c;
 
 	c = 0;
 	psize = ((size_t)p);
-	if (psize == (size_t)NULL)
+	if (psize == (size_t) NULL)
 		return (c);
 	while (psize > 0)
 	{
@@ -35,7 +35,7 @@ char	*convert_arg_p(void *p, char *base)
 	char		*buff;
 	size_t		psize;
 	size_t		csize;
-	int		i;
+	int			i;
 
 	i = 0;
 	psize = get_plen(p);
@@ -58,12 +58,3 @@ char	*convert_arg_p(void *p, char *base)
 	buff[i] = 0;
 	return (buff);
 }
-/*
-int	main(void)
-{
-	void	*pa = NULL;
-	
-	printf("%s\n%p\n", convert_arg_p(pa, "0123456789abcdef"), pa);
-	free(pa);
-	return 0;
-}*/

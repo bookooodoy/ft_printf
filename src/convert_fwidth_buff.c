@@ -13,6 +13,26 @@
 #include "../headers/ft_printf.h"
 #include "../inc/libft/libft.h"
 
+unsigned int	get_range(char *s)
+{
+	unsigned int	i;
+	unsigned int	range;
+
+	i = 0;
+	range = 0;
+	if (!s)
+		return (0);
+	while ((s[i] && !ft_isdigit(s[i])) || (s[i] && s[i] == '0'))
+	{
+		if (s[i] == '.')
+			return (0);
+		i++;
+	}
+	while (s[i] && ft_isdigit(s[i]))
+		range = (10 * range) + (s[i++] - '0');
+	return (range);
+}
+
 int	convert_fwidth_negative(t_prt *object)
 {
 	int	i;
@@ -20,7 +40,7 @@ int	convert_fwidth_negative(t_prt *object)
 	i = 0;
 	if (ft_putstr(object->buffer) == -1)
 		return (-1);
-	while (i < (size_t)object->fwidth - ft_strlen(object->buffer))
+	while ((size_t)i < ((size_t)object->fwidth - ft_strlen(object->buffer)))
 	{
 		if (ft_putchar(' ') == -1)
 			return (-1);
@@ -29,9 +49,12 @@ int	convert_fwidth_negative(t_prt *object)
 	return (i + ft_strlen(object->buffer));
 }
 
-int	convert_fwidth_nflag(t_prt *object);
+int	convert_fwidth_nflag(t_prt *object)
 {
-	while (i < (size_t)object->fwidth - ft_strlen(object->buffer))
+	int	i;
+
+	i = 0;
+	while ((size_t)i < ((size_t)object->fwidth - ft_strlen(object->buffer)))
 	{
 		if (ft_putchar(' ') == -1)
 			return (-1);

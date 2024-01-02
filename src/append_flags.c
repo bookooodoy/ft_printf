@@ -61,9 +61,6 @@ void	append_zeroes(char **buffer, unsigned int *fwidth)
 
 void	append_flags(t_prt *object)
 {
-	char	*new_buff;
-	char	*bzeroes;
-
 	if (object->buffer && object->flags && is_valid_param
 		(object->cflag, "xX") && is_valid_param('#', object->flags))
 		append_hashtag(&(object->buffer));
