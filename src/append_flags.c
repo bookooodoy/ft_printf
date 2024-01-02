@@ -24,7 +24,7 @@ void	append_flags(prt_t * object)
 		free(object->buffer);
 		object->buffer = new_buff;
 	}
-	if (object->buffer && object->flags && is_valid_param(object->cflag, "diu") && is_valid_param('+', object->flags))
+	if (object->buffer && object->flags && is_valid_param(object->cflag, "diu") && is_valid_param('+', object->flags) && ft_atoi(object->buffer) >= 0)
 	{
 		new_buff = ft_strjoin("+", object->buffer);
 		free(object->buffer);
@@ -36,7 +36,7 @@ void	append_flags(prt_t * object)
 		free(object->buffer);
 		object->buffer = new_buff;
 	}
-	if (object->buffer && object->flags && object->fwidth && !object->precision && is_valid_param(object->cflag, "diuxX") && is_valid_param('0', object->flags))
+	if (object->buffer && object->flags && object->fwidth && (object->precision != -1) && is_valid_param(object->cflag, "diuxX") && is_valid_param('0', object->flags))
 	{
 		if (ft_strlen(object->buffer) < object->fwidth)
 		{

@@ -36,7 +36,8 @@ SRCS=src/ft_printf.c\
      src/init_prt_func.c\
      src/convert_precision_buff.c\
      src/convert_fwidth_buff.c\
-     src/append_flags.c
+     src/append_flags.c\
+     src/ft_uitoa.c
 
 LIBFTSRCS = inc/libft/ft_atoi.c\
         inc/libft/ft_isascii.c\
@@ -104,7 +105,7 @@ $(LIBFTA):
 
 compile: re 
 	@echo "$(BOLD)$(CYAN)Compiling...$(RESET)"
-	$(CC) $(CLFAGS) -g3 $(SRCS) headers/ft_printf.h $(LIBFTA)
+	$(CC) $(CLFAGS) -g3 $(SRCS) headers/ft_printf.h $(LIBFTA) && echo "\n" && ./a.out
 	@echo "$(BOLD)$(MAGENTA)Done.$(RESET)\n"
 
 clean:

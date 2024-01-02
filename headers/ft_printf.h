@@ -23,7 +23,7 @@ typedef	struct
 	char		*flags;
 	char		cflag;
 	unsigned int	fwidth;
-	unsigned int	precision;
+	int	precision;
 } prt_t;
 
 // main functions
@@ -39,8 +39,9 @@ char		*convert_x(unsigned int x, char *base);
 char		*convert_s(const char *s);
 char		*convert_c(const char c);
 char    	*convert_d_i(int i);
-char    	*convert_u(unsigned int i);
+char	*convert_u(unsigned int i);
 char    *convert_from_flag(char cflag, va_list vargs);
+char    *ft_uitoa(unsigned int n);
 
 // core functions (print buffer with params and return len of printed value)
 prt_t	*init_params(char *s, va_list vargs);

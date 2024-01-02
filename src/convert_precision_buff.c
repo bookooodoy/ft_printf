@@ -41,11 +41,11 @@ void	convert_precision_buffer(prt_t * object)
 	char	*bzeroes;
 	char	*new_buff;
 
-	if (object->buffer && object->precision)
+	if (object->buffer && object->precision != -1)
 	{
 		if (is_valid_param(object->cflag, "diuxX"))
 		{
-			if (ft_strlen(object->buffer) < object->precision)
+			if (ft_strlen(object->buffer) < (size_t)object->precision)
 			{
 				bzeroes = malloc(sizeof(char) * object->precision + 1);
 				if (!bzeroes)
@@ -60,7 +60,7 @@ void	convert_precision_buffer(prt_t * object)
 		}
 		else if (is_valid_param(object->cflag, "s"))
 		{
-			if (ft_strlen(object->buffer) > object->precision)
+			if (ft_strlen(object->buffer) > (size_t)object->precision)
 			{
 				new_buff = ft_substr(object->buffer, 0, object->precision);
 				free(object->buffer);

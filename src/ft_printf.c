@@ -24,7 +24,7 @@ int	get_prt_objsize(char *s, va_list vargs)
 	object = init_params(s, vargs);
 	if (!object)
 		return (-1);
-	if (object->precision && object->cflag != 'c')
+	if ((object->precision != -1) && (object->cflag != 'c'))
 		convert_precision_buffer(object);
 	if (object->flags)
 		append_flags(object);
@@ -93,10 +93,13 @@ int	main(void)
 {
 	int a;
 	int b;
-	// digits test
-	a = ft_printf("test%d%i%u",0, INT_MAX, -2);
+	// flags test
+	
+	//char *s = "fils de putain";
+	int x = -3;
+	a = ft_printf("test %%c %-+10d", x);
 	printf("\n\n");
-	b = printf("test%d%i%u",0, INT_MAX, -2);
+	b = printf("test %%c %-+10d", x);
 	printf("\n\nValues:\n\n(mine) %d\n\n(original) %d", a, b);	
 	printf("\n\n");
 	return 0;

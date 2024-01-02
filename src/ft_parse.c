@@ -122,6 +122,8 @@ unsigned int	get_precision(char *s)
 		return (0);
 	while (s[i] && s[i] != '.')
 		i++;
+	if (s[i] != '.')
+		return (-1);
 	++i;
 	while (s[i] && ft_isdigit(s[i]))
 		precision = (10 * precision) + (s[i++] - '0');	

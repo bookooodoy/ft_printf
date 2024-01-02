@@ -27,7 +27,7 @@ char	*convert_u(unsigned int i)
 {
 	char	*converted;
 
-	converted = ft_itoa((unsigned int)i);
+	converted = ft_uitoa(i);
 	if (!converted)
 		return (NULL);
 	return (converted);

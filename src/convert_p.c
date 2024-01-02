@@ -41,7 +41,7 @@ char	*convert_arg_p(void *p, char *base)
 	psize = get_plen(p);
 	csize = (size_t)p;
 	if (!psize)
-		return (NULL);
+		return (ft_strdup("(nil)"));
 	buff = malloc(sizeof(char) * psize + 1);
 	if (!buff)
 		return (NULL);
