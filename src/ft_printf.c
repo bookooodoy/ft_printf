@@ -13,8 +13,6 @@
 #include "../headers/ft_printf.h"
 #include "../inc/libft/libft.h"
 
-#include <stdio.h>
-
 int	get_prt_objsize(char *s, va_list vargs)
 {
 	prt_t * object;
@@ -88,6 +86,7 @@ int	ft_printf(const char *s, ...)
 	return (va_end(vargs), fc);
 }
 
+#include <stdio.h>
 #include <limits.h>
 int	main(void)
 {
