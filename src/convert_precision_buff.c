@@ -21,7 +21,7 @@ unsigned int	get_precision(char *s)
 	precision = 0;
 	i = 0;
 	if (!s)
-		return (0);
+		return (-1);
 	while (s[i] && s[i] != '.')
 		i++;
 	if (s[i] != '.')
@@ -50,8 +50,6 @@ char	*convert_from_flag(char cflag, va_list vargs)
 		return (convert_x(va_arg(vargs, unsigned int), "0123456789abcdef"));
 	if (cflag == 'X')
 		return (convert_x(va_arg(vargs, unsigned int), "0123456789ABCDEF"));
-	if (cflag == '%')
-		return (ft_strdup("%"));
 	return (NULL);
 }
 

@@ -137,20 +137,3 @@ char	*parse_legal_flags(char *flags, char cflag)
 		flags = overwrite_flags(flags, ' ');
 	return (flags);
 }
-/*
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		char *s = argv[1];
-		char cflag = get_cflag(s+1);
-		printf("CFLAG = %c\n", cflag);
-		char *flags = get_flags(s+1);
-		printf("FLAGS = %s\n", flags);
-		printf("RANGE = %d\n", get_range(s+1));
-		printf("PRECISION = %d\n", get_precision(s+1));
-		printf("PARSED_FLAGS = %s\n", parse_legal_flags(flags, cflag));
-	}
-	return 0;
-}
-*/

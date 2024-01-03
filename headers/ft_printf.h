@@ -16,7 +16,6 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 typedef struct t_prt
 {
@@ -27,7 +26,7 @@ typedef struct t_prt
 	int				precision;
 }	t_prt;
 
-unsigned int	get_uintlen(int x);
+unsigned int	get_uintlen(unsigned int x);
 char			*convert_arg_p(void *p, char *base);
 char			*convert_x(unsigned int x, char *base);
 char			*convert_s(const char *s);

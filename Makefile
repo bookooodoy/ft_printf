@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: nraymond <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/17 03:29:37 by nraymond          #+#    #+#              #
-#    Updated: 2023/12/19 19:55:50 by nraymond         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Color codes
 RESET   = \033[0m
 BOLD    = \033[1m
@@ -27,17 +15,12 @@ INCL=headers/ft_printf.h\
 
 SRCS=src/ft_printf.c\
      src/ft_parse.c\
-     src/ft_writechars.c\
-     src/convert_p.c\
-     src/convert_c.c\
-     src/convert_s.c\
-     src/convert_x.c\
+     src/convert_args.c\
+     src/convert_chars.c\
      src/convert_integers.c\
-     src/init_prt_func.c\
      src/convert_precision_buff.c\
      src/convert_fwidth_buff.c\
      src/append_flags.c\
-     src/ft_uitoa.c
 
 LIBFTSRCS = inc/libft/ft_atoi.c\
         inc/libft/ft_isascii.c\
@@ -89,7 +72,6 @@ CC=cc
 bonus: all
 
 all: $(NAME)
-
 
 $(NAME): $(LIBFTA) $(OBJ) $(INCL) Makefile
 	@echo "$(BOLD)$(CYAN)Executing all...$(RESET)"

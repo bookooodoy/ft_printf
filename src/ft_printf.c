@@ -19,8 +19,35 @@ void	free_t_prt(t_prt *object)
 		return ;
 	if (*object->buffer)
 		free(object->buffer);
-	free(object->flags);
+	if (object->flags)
+		free(object->flags);
 	free(object);
+}
+
+t_prt	*init_params(char *s, va_list vargs)
+{
+	t_prt	*object;
+	char	*flags;
+
+	object = malloc(sizeof(t_prt));
+	if (!object)
+		return (NULL);
+	object->cflag = get_cflag(s);
+	if (!object->cflag)
+		return (NULL);
+	flags = get_flags(s);
+	if (*flags)
+	{
+		object->flags = parse_legal_flags(flags, object->cflag);
+		if (!object->flags)
+			return (free_t_prt(object), NULL);
+	}
+	object->fwidth = get_range(s);
+	object->precision = get_precision(s);
+	object->buffer = convert_from_flag(object->cflag, vargs);
+	if (!object->buffer)
+		return (free_t_prt(object), NULL);
+	return (object);
 }
 
 int	get_prt_objsize(char *s, va_list vargs)
@@ -36,10 +63,11 @@ int	get_prt_objsize(char *s, va_list vargs)
 		convert_precision_buffer(object);
 	if (object->flags)
 		append_flags(object);
-	if ((size_t)object->fwidth > ft_strlen(object->buffer))
+	if (object->fwidth && (size_t)object->fwidth > ft_strlen(object->buffer))
+	{
 		c = convert_fwidth_buffer(object);
-	if (c == -1)
 		return (free_t_prt(object), c);
+	}
 	if (object->cflag == 'c')
 		c = ft_putchar(*(object->buffer));
 	else
@@ -47,21 +75,31 @@ int	get_prt_objsize(char *s, va_list vargs)
 	return (free_t_prt(object), c);
 }
 
-int	ft_check_flag(char *substring, int *i, va_list vargs)
+int	ft_convert_cflag(const char *s, int *i, va_list vargs)
 {
-	int	c;
+	char	*substr;
+	int		c;
 
-	if (!substring)
-		return (-1);
-	c = get_prt_objsize(substring, vargs);
-	while (!is_valid_param(substring[*i], "cspdiuxX%") && substring[*i])
+	if (s[*i + 1] == '%')
+	{
+		c = ft_putchar(s[*i]);
 		*i += 1;
+	}
+	else
+	{
+		substr = ft_substr(s, *i + 1, ft_strlen(s));
+		if (!substr)
+			return (-1);
+		c = get_prt_objsize(substr, vargs);
+		while (!is_valid_param(s[*i], "cspdiuxX") && s[*i])
+			*i += 1;
+		free(substr);
+	}
 	return (c);
 }
 
 int	ft_printf(const char *s, ...)
 {
-	char	*substr;
 	int		i;
 	int		c;
 	int		fc;
@@ -75,11 +113,7 @@ int	ft_printf(const char *s, ...)
 	while (s[i])
 	{
 		if (s[i] == '%')
-		{
-			substr = ft_substr(s, i+1, ft_strlen(s));
-			c = ft_check_flag(substr, &i+1, vargs);
-			free(substr);
-		}
+			c = ft_convert_cflag(s, &i, vargs);
 		else
 			c = ft_putchar(s[i]);
 		if (c == -1)
@@ -88,22 +122,4 @@ int	ft_printf(const char *s, ...)
 		i++;
 	}
 	return (va_end(vargs), fc);
-}
-
-#include <stdio.h>
-#include <limits.h>
-int	main(void)
-{
-	//int a;
-	//int b;
-	// flags test
-	
-	//char *s = "fils de putain";
-	int x = -3;
-	ft_printf("test %%x %#-10x", x);
-	printf("\n\n");
-	//b = printf("test %%c %-+10d", x);
-	//printf("\n\nValues:\n\n(mine) %d\n\n(original) %d", a, b);	
-	//printf("\n\n");
-	return 0;
 }

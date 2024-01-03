@@ -70,9 +70,9 @@ int	convert_fwidth_buffer(t_prt *object)
 	if (object->buffer && object->fwidth)
 	{
 		if (is_valid_param('-', object->flags) && object->cflag != '%')
-			convert_fwidth_negative(object);
+			return (convert_fwidth_negative(object));
 		else if (object->buffer && object->fwidth)
-			convert_fwidth_nflag(object);
+			return (convert_fwidth_nflag(object));
 	}
 	return (ft_strlen(object->buffer));
 }
